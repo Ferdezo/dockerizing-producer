@@ -1,0 +1,54 @@
+version: '3'
+
+networks:
+  discount-bridge:
+    driver: bridge
+
+services:
+  mongodb:
+    image: mongo:4
+    container_name: discount-mongo
+    ports:
+      - 27017-27019:27017-27019
+    volumes:
+      - /tmp/Docker/mongodb:/data/db
+    networks:
+      - discount-bridge
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: discount-rabbit
+    ports:
+      - 15672:15672
+      - 5672:5672
+    networks:
+      - discount-bridge
+
+  producer:
+    build:
+      context: .
+    container_name: discount-producer
+    ports:
+      - 8080:8080
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+      - mongodb
+    networks:
+      - discount-bridge
+    environment:
+      - ENV=loc
+    entrypoint: ./waitEntrypoint.sh
+
+  consumer:
+    image: discount-consumer
+    ports:
+      - 8088:8082
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+      - producer
+    networks:
+      - discount-bridge
+
+

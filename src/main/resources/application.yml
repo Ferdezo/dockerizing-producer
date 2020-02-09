@@ -1,0 +1,13 @@
+spring:
+  data:
+    mongodb:
+      database: discount
+
+messages:
+  discount:
+    exchange:
+      name: discounts
+    queue:
+      name: discount
+    routing-key:
+      name: simple
