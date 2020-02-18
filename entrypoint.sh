@@ -2,4 +2,4 @@
 
 echo Running Java App!
 
-java -jar discount-producer.jar --spring.profiles.active=${ENV}
+java org.springframework.boot.loader.JarLauncher --spring.profiles.active=${ENV}

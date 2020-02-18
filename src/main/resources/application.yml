@@ -11,3 +11,5 @@ messages:
       name: discount
     routing-key:
       name: simple
+    test:
+      key: val
