@@ -1,13 +1,13 @@
-FROM maven:3.6-jdk-11 AS BUILD 
+FROM maven:3.8.5-openjdk-17 AS BUILD
 
 COPY /src /app/src
 
-COPY pom.xml /app/pom.xml 
+COPY pom.xml /app/pom.xml
 
 RUN mvn -f /app/pom.xml install
 
 
-FROM openjdk:11.0.4-jre
+FROM openjdk:17.0.1
 
 RUN java -version
 

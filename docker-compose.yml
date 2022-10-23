@@ -41,7 +41,7 @@ services:
     entrypoint: ./waitEntrypoint.sh
 
   consumer:
-    image: discount-consumer
+    image: ferdezo/discount-consumer
     ports:
       - 8088:8082
     restart: on-failure

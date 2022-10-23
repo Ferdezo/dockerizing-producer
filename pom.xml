@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.2.RELEASE</version>
+        <version>2.7.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -16,9 +16,9 @@
     <description>Demo for dockerizing Java App</description>
 
     <properties>
-        <java.version>11</java.version>
-        <vavr.version>0.10.2</vavr.version>
-        <jib.version>1.7.0</jib.version>
+        <java.version>17</java.version>
+        <vavr.version>0.10.4</vavr.version>
+        <jib.version>3.3.0</jib.version>
     </properties>
 
     <dependencies>

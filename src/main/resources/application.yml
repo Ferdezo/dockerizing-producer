@@ -3,6 +3,10 @@ spring:
     mongodb:
       database: discount
 
+  rabbitmq:
+    username: ${RMQ_USERNAME:guest}
+    password: ${RMQ_PASSWROD:guest}
+
 messages:
   discount:
     exchange:
