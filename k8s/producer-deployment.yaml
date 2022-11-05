@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discount-producer
+spec:
+  selector:
+    matchLabels:
+      app: discount-producer
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: discount-producer
+    spec:
+      containers:
+        - name: discount-producer
+          image: ferdezo/discount-producer
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http-port
+              protocol: TCP
+          env:
+            - name: ENV
+              value: k8s
+            - name: RMQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-creds
+                  key: username
+                  optional: false
+            - name: RMQ_PASSWROD
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-creds
+                  key: password
+                  optional: false
+        - name: mongodb
+          image: mongo:4
+          volumeMounts:
+            - mountPath: "/data/db"
+              name: mongo-pv
+      volumes:
+        - name: mongo-pv
+
+
+
+
+
+
+
+
+
+
